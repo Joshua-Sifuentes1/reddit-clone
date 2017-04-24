@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/sayhello/{name}', function($name)
+Route::get('/sayhello/{name?}', function($name = '')
 {
 	if ($name == 'Joshua') {
 		return Redirect::to('/');
