@@ -14,3 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/uppercase/{word?}', function($word = "UPPERCASE") {
+	return strtoupper($word);
+});
+
+Route::get('/increment/{number?}', function($number = 0) {
+	if (is_numeric($number)) {
+		return $number + 1;
+	} else {
+		return $number . " is not a number.";
+	}
+});
+
+Route::get('/add/{num1?}/{num2?}', function($num1 = 0, $num2 = 0) {
+	if (is_numeric($num1) && is_numeric($num2)) {
+		return $num1 + $num2;
+	} else {
+		return "Both parameters must be numeric."
+	}
+});
