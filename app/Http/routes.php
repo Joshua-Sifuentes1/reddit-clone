@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () 
+{
     return view('welcome');
 });
 
@@ -24,11 +25,13 @@ Route::get('/sayhello/{name?}', function($name = '')
     return view('my-first-view', $data);
 });
 
-Route::get('/uppercase/{word?}', function($word = "UPPERCASE") {
+Route::get('/uppercase/{word?}', function($word = "UPPERCASE") 
+{
 	return strtoupper($word);
 });
 
-Route::get('/increment/{number?}', function($number = 0) {
+Route::get('/increment/{number?}', function($number = 0) 
+{
 	if (is_numeric($number)) {
 		return $number + 1;
 	} else {
