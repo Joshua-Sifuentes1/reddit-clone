@@ -15,6 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/sayhello/{name}', function($name)
+{
+	if ($name == 'Joshua') {
+		return Redirect::to('/');
+	}
+	$data = ['name' => $name];
+    return view('my-first-view', $data);
+});
+
 Route::get('/uppercase/{word?}', function($word = "UPPERCASE") {
 	return strtoupper($word);
 });
@@ -31,6 +40,6 @@ Route::get('/add/{num1?}/{num2?}', function($num1 = 0, $num2 = 0) {
 	if (is_numeric($num1) && is_numeric($num2)) {
 		return $num1 + $num2;
 	} else {
-		return "Both parameters must be numeric."
+		return "Both parameters must be numeric.";
 	}
 });
