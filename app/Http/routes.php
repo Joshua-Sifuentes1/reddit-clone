@@ -43,3 +43,20 @@ Route::get('/add/{num1?}/{num2?}', function($num1 = 0, $num2 = 0) {
 		return "Both parameters must be numeric.";
 	}
 });
+
+Route::get('rolldice/{guess}', function($guess) {
+	$diceRoll = rand(1, 6);
+	if (!is_numeric($guess) || $guess < 1 || $guess > 6) {
+		$message = "Please pick a number from 1-6.";
+	} else if ($guess == $diceRoll) {
+		$message = "You guessed correctly!";
+	} else {
+		$message = "You did not guess correctly.";
+	}
+	$data = [
+		'guess' => $guess, 
+		'diceRoll' => $diceRoll,
+		'message' => $message
+		];
+	return view('roll-dice', $data);
+});
