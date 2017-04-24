@@ -13,7 +13,7 @@
 
 Route::get('/', function () 
 {
-    return view('welcome');
+	return view('welcome');
 });
 
 Route::get('/sayhello/{name?}', function($name = '')
@@ -22,7 +22,7 @@ Route::get('/sayhello/{name?}', function($name = '')
 		return Redirect::to('/');
 	}
 	$data = ['name' => $name];
-    return view('my-first-view', $data);
+	return view('my-first-view', $data);
 });
 
 Route::get('/uppercase/{word?}', function($word = "UPPERCASE") 
