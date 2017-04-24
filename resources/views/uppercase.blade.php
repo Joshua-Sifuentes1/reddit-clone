@@ -1,5 +1,5 @@
 @extends('layouts/master')
-
+<!--  -->
 @section('content')
 	<h1>Original word:</h1>
 	<h3>{{ $word }}</h3>
