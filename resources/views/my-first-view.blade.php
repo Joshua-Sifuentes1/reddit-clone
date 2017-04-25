@@ -6,6 +6,6 @@
 	@else
     	<h1>You must have a name, right?</h1>
 	@endif
-	
+
 	<p>This is a paragraph.</p>
 @stop
