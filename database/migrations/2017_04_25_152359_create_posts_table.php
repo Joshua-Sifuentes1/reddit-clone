@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
 			// url a link to external content
 			$table->string('url');
 			// content several paragraphs of text
-			$table->string('description');
+			$table->text('content');
 			// created_by  a foreign key that references the user table
 			$table->integer('created_by')->unsigned();
 			$table->foreign('created_by')->references('id')->on('users');

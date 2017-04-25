@@ -66,3 +66,5 @@ Route::get('rolldice/{guess}', function($guess) {
 		];
 	return view('roll-dice', $data);
 });
+
+Route::resource('posts', 'PostsController');

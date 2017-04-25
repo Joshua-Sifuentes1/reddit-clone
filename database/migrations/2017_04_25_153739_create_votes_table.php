@@ -15,6 +15,7 @@ class CreateVotesTable extends Migration
 		Schema::create('votes', function(Blueprint $table){
 		// id incrementing primary key
 			$table->increments('id');
+			$table->integer('votes');
 		// user_id a foreign key that referencs the users table
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
@@ -22,7 +23,6 @@ class CreateVotesTable extends Migration
 			$table->integer('post_id')->unsigned();
 			$table->foreign('post_id')->references('id')->on('posts');
 		// vote	a numeric representation of whether a user votes a post up or down
-			$table->integer('votes');
 		// created_at a datetime
 		// updated_at a datetime
 			$table->timestamps();			
