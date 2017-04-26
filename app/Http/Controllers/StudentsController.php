@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class PostsController extends Controller
+class StudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = \App\Models\Post::all();
-        $data['posts'] = $posts;
-        return view('posts.index', $data);
+        //
     }
 
     /**
@@ -28,7 +26,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('students.create');
     }
 
     /**
@@ -39,13 +37,8 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new \App\Models\Post();
-        $post->title = $request->title;
-        $post->url = $request->url;
-        $post->content = $request->content;
-        $post->save();
-
-        return redirect()->action('PostsController@index');
+        var_dump($request->all());
+        back()->withInput();
     }
 
     /**
@@ -56,9 +49,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = \App\Models\Post::find($id);
-        return view('posts.show', ['post'=>$post]);
-
+        //
     }
 
     /**
@@ -69,8 +60,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('posts.edit');
+        return view('students.edit');
     }
 
     /**
@@ -82,8 +72,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return 'Update a specific post';
+        return view('students.edit');
     }
 
     /**
