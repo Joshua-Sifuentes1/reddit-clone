@@ -3,7 +3,7 @@
 @section('content')
 <!-- title, content, url -->
 <h1>Edit post</h1>
-<form action="{{ action('PostsController@edit') }}" method="POST">
+<form action="{{ action('PostsController@update', [$post->id]) }}" method="POST">
 	{!! csrf_field() !!}
 	<div class="form-group">
 		<label for="title">Title</label>
@@ -17,9 +17,10 @@
 		<label for="url">URL</label>
 		<input type="url" id="url" name='url' class="form-control" value="{{ old('url') }}">
 	</div>
-	<input type="submit" class="btn btn-default" value="Edit">
+	<input type="submit" class="btn btn-default" value="Update">
+	{{ method_field('PUT') }}
 </form>
-<form action="{{ action('PostsController@destroy') }}" method="POST">
+<form action="{{ action('PostsController@destroy', [$post->id]) }}" method="POST">
 	{!! csrf_field() !!}
 	<input type="submit" value="Delete" class="btn btn-danger">
 	{{ method_field('DELETE') }}	

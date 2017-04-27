@@ -1,22 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container">
-	<h1>All Posts</h1>
-	<table class="table table-striped table-bordered">
+<h1>All Posts</h1>
+<table class="table table-striped table-bordered">
+	<tr>
+		<th>Title</th>
+		<th>URL</th>
+		<th>Content</th>
+{!! $posts->render() !!}
+	</tr>
+		@foreach ($posts as $post)
 		<tr>
-			<th>Title</th>
-			<th>URL</th>
-			<th>Content</th>
+			<td>{{ $post->title }}</td>
+			<td>{{ $post->url }}</td>
+			<td>{{ $post->content }}</td>
 		</tr>
-			@foreach ($posts as $post)
-			<tr>
-				<td>{{ $post->title }}</td>
-				<td>{{ $post->url }}</td>
-				<td>{{ $post->content }}</td>
-			</tr>
-			@endforeach
-	</table>
-</div>
+		@endforeach
+</table>
 
 @stop

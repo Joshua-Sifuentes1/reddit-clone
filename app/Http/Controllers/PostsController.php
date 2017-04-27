@@ -9,92 +9,108 @@ use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $posts = \App\Models\Post::all();
-        $data['posts'] = $posts;
-        return view('posts.index', $data);
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		$posts = \App\Models\Post::paginate(4);
+		
+		return view('posts.index')->with('posts', $posts);
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('posts.create');
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		return view('posts.create');
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $post = new \App\Models\Post();
-        $post->title = $request->title;
-        $post->url = $request->url;
-        $post->content = $request->content;
-        $post->save();
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		$rules = \App\Models\Post::$rules;
 
-        return redirect()->action('PostsController@index');
-    }
+		$this->validate($request, $rules);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $post = \App\Models\Post::find($id);
-        return view('posts.show', ['post'=>$post]);
+		$post = new \App\Models\Post();
+		$post->title = $request->title;
+		$post->url = $request->url;
+		$post->content = $request->content;
+		$post->created_by = 4;
+		$post->save();
 
-    }
+		return redirect()->action('PostsController@index');
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        return view('posts.edit');
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id)
+	{
+		$post = \App\Models\Post::find($id);
+		return view('posts.show', compact('post'));
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-        return 'Update a specific post';
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id)
+	{
+		$post = \App\Models\Post::find($id);
+		return view('posts.edit')->with('post', $post);
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-        return 'Deleting post with id: ' . $id;
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $id)
+	{
+		$rules = \App\Models\Post::$rules;
+
+        $this->validate($request, $rules);
+
+		$post = \App\Models\Post::find($id);
+		$post->title = $request->title;
+		$post->url = $request->url;
+		$post->content = $request->content;
+		$post->created_by = 4;
+		$post->save();
+
+		return redirect()->action('PostsController@index');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id)
+	{
+		$post = \App\Models\Post::find($id);
+		$post->delete();
+
+		return redirect()->action('PostsController@index');
+	}
 }

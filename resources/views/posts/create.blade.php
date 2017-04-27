@@ -8,6 +8,9 @@
 	<div class="form-group">
 		<label for="title">Title</label>
 		<input type="text" id="title" name='title' class="form-control" value="{{ old('title') }}">
+		@if ($errors->has('title'))
+			{!! $errors->first('title', '<span class="help-block">:message</span>') !!}
+		@endif
 	</div>
 	<div class="form-group">
 		<label for="content">Content</label>
