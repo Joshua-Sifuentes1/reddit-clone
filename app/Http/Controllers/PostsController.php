@@ -35,7 +35,7 @@ class PostsController extends Controller
 
 		// $session->forget('greet');
 
-		dd($request->session()->get('greet'));
+		// dd($request->session()->get('greet'));
 
 		return view('posts.create');
 	}
