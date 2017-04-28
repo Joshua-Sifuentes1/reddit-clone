@@ -14,9 +14,12 @@ class PostsController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$posts = \App\Models\Post::paginate(4);
+		$session = $request->session();
+		$session->put('greet', 'hello world');
+
+		$posts = \App\Models\Post::orderBy('created_at', 'Desc')->paginate(4);
 		
 		return view('posts.index')->with('posts', $posts);
 	}
@@ -26,8 +29,14 @@ class PostsController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
+		$session = $request->session();
+
+		// $session->forget('greet');
+
+		dd($request->session()->get('greet'));
+
 		return view('posts.create');
 	}
 
@@ -62,7 +71,8 @@ class PostsController extends Controller
 	public function show($id)
 	{
 		$post = \App\Models\Post::find($id);
-		return view('posts.show', compact('post'));
+		$time = $post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i:s A');
+		return view('posts.show', compact('post', 'time'));
 	}
 
 	/**

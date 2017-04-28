@@ -7,13 +7,15 @@
 		<th>Title</th>
 		<th>URL</th>
 		<th>Content</th>
+		<th>Created</th>
 {!! $posts->render() !!}
 	</tr>
 		@foreach ($posts as $post)
 		<tr>
-			<td>{{ $post->title }}</td>
-			<td>{{ $post->url }}</td>
+			<td><a href="{{ action('PostsController@show', [$post->id]) }}">{{ $post->title }}</a></td>
+			<td><a href="{{ $post->url }}">{{ $post->url }}</a></td>
 			<td>{{ $post->content }}</td>
+			<td>{{ $post->created_at }}</td>
 		</tr>
 		@endforeach
 </table>
