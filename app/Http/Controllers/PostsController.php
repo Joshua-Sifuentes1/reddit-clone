@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 
 class PostsController extends Controller
 {
@@ -19,7 +20,7 @@ class PostsController extends Controller
 		$session = $request->session();
 		$session->put('greet', 'hello world');
 
-		$posts = \App\Models\Post::orderBy('created_at', 'Desc')->paginate(4);
+		$posts = Post::orderBy('created_at', 'Desc')->paginate(4);
 		
 		return view('posts.index')->with('posts', $posts);
 	}
@@ -48,11 +49,11 @@ class PostsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$rules = \App\Models\Post::$rules;
+		$rules = Post::$rules;
 
 		$this->validate($request, $rules);
 
-		$post = new \App\Models\Post();
+		$post = new Post();
 		$post->title = $request->title;
 		$post->url = $request->url;
 		$post->content = $request->content;
@@ -70,7 +71,7 @@ class PostsController extends Controller
 	 */
 	public function show($id)
 	{
-		$post = \App\Models\Post::find($id);
+		$post = Post::find($id);
 		$time = $post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i:s A');
 		return view('posts.show', compact('post', 'time'));
 	}
@@ -83,7 +84,7 @@ class PostsController extends Controller
 	 */
 	public function edit($id)
 	{
-		$post = \App\Models\Post::find($id);
+		$post = Post::find($id);
 		return view('posts.edit')->with('post', $post);
 	}
 
@@ -96,11 +97,11 @@ class PostsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		$rules = \App\Models\Post::$rules;
+		$rules = Post::$rules;
 
         $this->validate($request, $rules);
 
-		$post = \App\Models\Post::find($id);
+		$post = Post::find($id);
 		$post->title = $request->title;
 		$post->url = $request->url;
 		$post->content = $request->content;

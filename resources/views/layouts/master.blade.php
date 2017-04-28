@@ -21,9 +21,11 @@
       		</button>
       		<a class="navbar-brand" href="/">Reddit-Clone</a>
 		</div>
-		<ul class="nav navbar-nav navbar-right">
-        	<li><a href="/login">Login</a></li>
-        </ul>
+		<div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+	        	<li><a href="/login">Login / Register</a></li>
+	        </ul>
+		</div>
 	</div>
 </nav>
 
@@ -31,6 +33,8 @@
 		@yield('content')
 	</div>
 
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>

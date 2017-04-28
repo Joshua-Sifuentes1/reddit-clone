@@ -70,6 +70,7 @@ Route::get('rolldice/{guess}', function($guess) {
 Route::resource('posts', 'PostsController');
 Route::resource('students', 'StudentsController');
 Route::resource('login', 'LoginController');
+Route::resource('register', 'RegisterController');
 Route::get('orm-test', function ()
 {
 	// $user = new \App\User();
