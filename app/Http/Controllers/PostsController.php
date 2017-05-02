@@ -17,8 +17,7 @@ class PostsController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$session = $request->session();
-		$session->put('greet', 'hello world');
+		$request->session()->flash('status', 'Task was successful!');
 
 		$posts = Post::orderBy('created_at', 'Desc')->paginate(4);
 		
@@ -49,6 +48,8 @@ class PostsController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		$request->session()->flash('message', 'Task was successful!');
+
 		$rules = Post::$rules;
 
 		$this->validate($request, $rules);
@@ -59,6 +60,8 @@ class PostsController extends Controller
 		$post->content = $request->content;
 		$post->created_by = 4;
 		$post->save();
+
+		$request->session()->flash('successMessage', 'Post saved successfully');
 
 		return redirect()->action('PostsController@index');
 	}

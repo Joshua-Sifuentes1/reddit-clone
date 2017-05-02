@@ -69,22 +69,12 @@ Route::get('rolldice/{guess}', function($guess) {
 
 Route::resource('posts', 'PostsController');
 Route::resource('students', 'StudentsController');
-Route::resource('login', 'LoginController');
-Route::resource('register', 'RegisterController');
-Route::get('orm-test', function ()
-{
-	// $user = new \App\User();
-	// $user->name = 'Joshua';
-	// $user->email = 'joshua@codeup7.com';
-	// $user->password = 'password';
-	// $user->save();
 
-	// $post = new \App\Models\Post();
-	// $post->title = 'My first post';
-	// $post->content = "My first post content";
-	// $post->url = 'http://codeup.com';
-	// $post->created_by = $user->id;
-	// $post->save();
+// Authentication routes...
+Route::get('/login', 'Auth\AuthController@getLogin');
+Route::post('/login', 'Auth\AuthController@postLogin');
+Route::get('/logout', 'Auth\AuthController@getLogout');
 
-	// return \App\Models\Post::all();
-});
+// Registration routes...
+Route::get('/register', 'Auth\AuthController@getRegister');
+Route::post('/register', 'Auth\AuthController@postRegister');

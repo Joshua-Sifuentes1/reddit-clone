@@ -30,6 +30,9 @@
 </nav>
 
 	<div class="container">
+		 @if (Session::has('successMessage'))
+            <div class="alert alert-success">{{ session('successMessage') }}</div>
+        @endif
 		@yield('content')
 	</div>
 
